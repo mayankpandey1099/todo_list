@@ -4,7 +4,7 @@ const {
   getPaginatedList,
   deleteList,
   updateMarkedDone,
-} = require("../src/controller/todoListController");
+} = require("../controller/todoListController");
 
 const listRouter = express.Router();
 

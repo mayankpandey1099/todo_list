@@ -3,20 +3,20 @@ require("dotenv").config();
 //importing modules
 const express =require("express");
 const cors = require("cors");
-const sequelize = require("./src/utils/db");
+const sequelize = require("./utils/db");
 
 //importing middleware
-const {verify} = require("./src/middleware/verifyToken");
+const {verify} = require("./middleware/verifyToken");
 
 //importing routes
-const authRouter = require("./src/router/authRouter");
-const listRouter = require("./src/router/listRouter");
-const sharedRouter = require("./src/router/sharedListRouter");
+const authRouter = require("./router/authRouter");
+const listRouter = require("./router/listRouter");
+const sharedRouter = require("./router/sharedListRouter");
 
 //iimporting models
-const User = require("./src/model/userModel");
-const List = require("./src/model/listModel");
-const SharedList = require("./src/model/sharedListModel");
+const User = require("./model/userModel");
+const List = require("./model/listModel");
+const SharedList = require("./model/sharedListModel");
 
 //instantiating the application
 const app = express();

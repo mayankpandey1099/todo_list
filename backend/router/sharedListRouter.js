@@ -7,7 +7,7 @@ const {
   createSharedList,
   updateSharedList,
   updateMarkedDone,
-} = require("../src/controller/sharedListController");
+} = require("../controller/sharedListController");
 
 const sharedRouter = express.Router();
 
