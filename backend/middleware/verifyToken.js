@@ -6,9 +6,10 @@ const jwt = require("jsonwebtoken");
 const verify = async (req, res, next) => {
   try {
     let token = req.header("Authorization");
+    console.log(token);
     const key = process.env.jwtSecret;
 
-    token = token.replace("Bearer ", "");
+    //token = token.replace("Bearer ", "");
 
     const user = jwt.verify(token, key);
     User.findOne({ where: { id: user.userId } })

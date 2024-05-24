@@ -7,6 +7,7 @@ const {
   createSharedList,
   updateSharedList,
   updateMarkedDone,
+  deleteSharedList
 } = require("../controller/sharedListController");
 
 const sharedRouter = express.Router();
@@ -18,7 +19,8 @@ sharedRouter.delete("/notify/:id", deleteNotification);
 
 sharedRouter.post("/:id", createSharedList);
 sharedRouter.get("/list", getSharedList);
+sharedRouter.delete("/list/delete/:id", deleteSharedList);
 sharedRouter.put("/list/:id", updateSharedList);
-sharedRouter.put("/list/update/:id", updateMarkedDone);
+sharedRouter.patch("/list/update/:id", updateMarkedDone);
 
 module.exports = sharedRouter;

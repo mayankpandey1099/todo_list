@@ -5,23 +5,12 @@ const User = require("../model/userModel");
 const getPaginatedList = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const page = req.query.page;
-
-    const pageSize = 5;
-    const { count, rows } = await List.findAndCountAll({
+    const rows  = await List.findAll({
       where: { userId: userId },
       attributes: ["id", "title", "description"],
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
     });
-
-    const totalPages = Math.ceil(count / pageSize);
-
     res.json({
-      totalItems: count,
-      totalPages: totalPages,
-      currentPage: page,
-      expenses: rows,
+      lists: rows,
     });
     console.log("successfully dispatched the data");
   } catch (error) {
@@ -89,7 +78,6 @@ const deleteList = async (req, res) => {
 //update fnction for updating the list by their id
 const updateMarkedDone = async (req, res) => {
   const listId = req.params.id;
-
   try {
     const userId = req.user.userId;
 
@@ -102,7 +90,6 @@ const updateMarkedDone = async (req, res) => {
         error: "List not found",
       });
     }
-
     const row = await List.update(
       {
         markedDone:true

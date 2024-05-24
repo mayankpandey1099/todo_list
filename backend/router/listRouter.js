@@ -11,6 +11,6 @@ const listRouter = express.Router();
 listRouter.post("/", createList);
 listRouter.get("/lists", getPaginatedList);
 listRouter.delete("/:id", deleteList);
-listRouter.put("/:id", updateMarkedDone);
+listRouter.patch("/:id", updateMarkedDone);
 
 module.exports = listRouter;
