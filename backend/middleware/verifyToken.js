@@ -8,7 +8,7 @@ const verify = async (req, res, next) => {
     let token = req.header("Authorization");
     const key = process.env.jwtSecret;
 
-    //token = token.replace("Bearer ", "");
+    token = token.replace("Bearer ", "");
 
     const user = jwt.verify(token, key);
     User.findOne({ where: { id: user.userId } })

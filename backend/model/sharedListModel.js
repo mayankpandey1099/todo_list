@@ -1,4 +1,4 @@
-const sequelize = require("../utils/db");
+const sequelize = require("../../utils/db");
 const Sequelize = require("sequelize");
 
 const SharedList = sequelize.define("sharedlist", {
@@ -14,6 +14,10 @@ const SharedList = sequelize.define("sharedlist", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  markedDone: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
-module.exports = List;
+module.exports = SharedList;

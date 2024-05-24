@@ -1,7 +1,5 @@
 const List = require("../model/listModel");
 const User = require("../model/userModel");
-const sequelize = require("../utils/db");
-
 
 //function for getting all paginated todo-list 
 const getPaginatedList = async (req, res) => {
@@ -89,9 +87,8 @@ const deleteList = async (req, res) => {
 };
 
 //update fnction for updating the list by their id
-const updateList = async (req, res) => {
+const updateMarkedDone = async (req, res) => {
   const listId = req.params.id;
-  const { title, description} = req.body;
 
   try {
     const userId = req.user.userId;
@@ -108,8 +105,7 @@ const updateList = async (req, res) => {
 
     const row = await List.update(
       {
-        title,
-        description,
+        markedDone:true
       },
       {
         where: { id: listId, userId: userId }
@@ -130,7 +126,7 @@ const updateList = async (req, res) => {
   }
 };
 
-module.exports = {getPaginatedList, createList, deleteList, updateList};
+module.exports = {getPaginatedList, createList, deleteList, updateMarkedDone};
 
 
 
