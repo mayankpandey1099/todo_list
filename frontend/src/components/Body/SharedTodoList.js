@@ -9,10 +9,14 @@ const SharedList = () => {
   const token = useSelector((state)=> state.auth.isToken);
   
 
-  useEffect(()=>{
-    const intervalId = setInterval(fetchSharedTodoList, 2000);
-    return () => clearInterval(intervalId);
-  }, [])
+  // useEffect(()=>{
+  //   const intervalId = setInterval(fetchSharedTodoList, 2000);
+  //   return () => clearInterval(intervalId);
+  // }, [])
+  useEffect(() => {
+    fetchSharedTodoList()
+  },[]);
+
 
 
   const fetchSharedTodoList = async () => {
