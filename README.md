@@ -5,11 +5,12 @@ This is a simple To-Do List application built with React and Express.js. It feat
 ## Features
 
 - User Authentication
-- Add, Edit, and Delete To-Do Tasks
+- Add and Delete To-Do Tasks
 - Mark Tasks as Done
 - Share Tasks with Other Users
 - Notification System for Shared Tasks
 - nodemailer authentication message to email id
+- shared tasks with delete and mark as done 
 
 ## Getting Started
 
@@ -26,7 +27,7 @@ Ensure you have the following installed on your local development environment:
 
     ```bash
     git clone https://github.com/mayankpandey1099/todo_list.git
-    cd todo-app
+    cd backend
     ```
 
 2. Install the dependencies:
@@ -44,7 +45,7 @@ Ensure you have the following installed on your local development environment:
 4. (Optional) Install additional dependencies if needed:
 
     ```bash
-    npm install express cors body-parser
+    npm install express cors
     ```
 
 ### Running the Application
@@ -105,6 +106,30 @@ To run the full application (both backend and frontend), follow these steps:
 - **react-redux**: Official React bindings for Redux
 - **react-router-dom**: DOM bindings for React Router
 - **tailwindcss**: A utility-first CSS framework for rapidly building custom designs
+
+### Backend Routes
+#### login and signup and get all users
+- **loginUser**: [POST] https://your_server:port/user/login     
+- **signupUset**: [POST] https://your_server:port/user/signup
+- **getAllUser**: [GET] https://your_server:port/user/users
+
+#### todo list
+- **createList**: [POST] https://your_server:port/todolist
+- **getAllToDoList**: [GET] https://your_server:port/todolist/lists
+- **deleteList**: [DELETE] https://your_server:port/todolist/:id
+- **updateMarkedDone**: [PATCH] https://your_server:port/todolist/update/:id
+
+#### sharedtodo list
+- **createSharedToDoList**: [POST] https://your_server:port/sharedtodolist/:uderId
+- **getAllSharedToDoList**: [GET] https://your_server:port/sharedtodolist/lists
+- **deleteSharedList**: [DELETE] https://your_server:port/sharedtodolist/delete/:id
+- **updateMarkedDone**: [PATCH] https://your_server:port/sharedtodolist/update/:id
+
+#### notification
+- **getAllNotification**: [GET] https://your_server:port/notification/lists
+- **deleteNotification**: [DELETE] https://your_server:port/notification/delete/:id
+- **updateNotification**: [PATCH] https://your_server:port/notification/update/:id 
+
 
 
 
