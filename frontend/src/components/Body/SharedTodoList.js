@@ -22,7 +22,7 @@ const SharedList = () => {
   const fetchSharedTodoList = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http:localhost:3000/list", {
+      const response = await axios.get("http://localhost:3000/sharedtodolist/lists", {
         headers: {
           Authorization: token,
         },
@@ -37,7 +37,7 @@ const SharedList = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http:localhost:3000shared/list/delete/${id}`, {
+      .delete(`http://localhost:3000/sharedtodolist/delete/${id}`, {
         headers: {
           Authorization: token,
         },
@@ -51,7 +51,7 @@ const SharedList = () => {
 
   const handleMarkAsRead = (id) => {
     axios
-      .put(`http://localhost:3000/shared/list/update/${id}`, {}, {
+      .put(`http://localhost:3000/sharedtodolist/update/${id}`, {}, {
         headers: {
           Authorization: token,
         },

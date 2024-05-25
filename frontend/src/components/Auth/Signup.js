@@ -22,7 +22,7 @@ const Signup = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/sign/signup",
+        "http://localhost:3000/user/signup",
         formData
       );
 
@@ -47,20 +47,6 @@ const Signup = () => {
     <div className="flex h-screen">
       <div className="m-auto">
         <div className="p-8 shadow-lg rounded-xl text-center bg-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="inline text-cyan-600 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-            />
-          </svg>
           <h1 className="text-3xl font-bold text-cyan-500 pb-3">
             Create an account
           </h1>
@@ -69,8 +55,8 @@ const Signup = () => {
               <input
                 type="text"
                 name="name"
-                className="p-2 rounded-lg bg-gray-100 shadow-md focus:outline-none focus:border-2 border-cyan-500"
-                placeholder="Emelia Erickson"
+                className="p-2 rounded-lg bg-gray-100 shadow-md border-cyan-500"
+                placeholder="your name"
                 required
                 value={formData.name}
                 onChange={handleChange}
@@ -78,8 +64,8 @@ const Signup = () => {
               <input
                 type="email"
                 name="email"
-                className="p-2 rounded-lg bg-gray-100 shadow-md focus:outline-none focus:border-2 border-cyan-500"
-                placeholder="emelia_erickson24@gmail.com"
+                className="p-2 rounded-lg bg-gray-100 shadow-md border-cyan-500"
+                placeholder="....@gmail.com"
                 required
                 value={formData.email}
                 onChange={handleChange}
@@ -88,7 +74,7 @@ const Signup = () => {
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className="p-2 rounded-lg bg-gray-100 shadow-md focus:outline-none focus:border-2 border-cyan-500"
+                className="p-2 rounded-lg bg-gray-100 shadow-md border-cyan-500"
                 required
                 value={formData.password}
                 onChange={handleChange}

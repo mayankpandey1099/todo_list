@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Notifications = ({ user }) => {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const token = useSelector((state) => state.auth.isToken);
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/shared/notify", {
-        params: { user },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/notification/lists",
+        {
+          headers: {
+            Authorization: token,
+          },
+        });
       setNotifications(response.data);
     } catch (error) {
       console.error("There was an error fetching notifications!", error);
@@ -18,10 +24,24 @@ const Notifications = ({ user }) => {
 
   const handleAction = async (id, status) => {
     try {
-      await axios.post(`http://localhost:3000/shared/notify/${id}`, {
-        status,
-      });
-      fetchNotifications(); // Refresh notifications after action
+      if (status) {
+        await axios.delete(`http://localhost:3000/notification/delete/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      } else {
+        await axios.patch(
+          `http://localhost:3000/notification/update/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+      }
+      fetchNotifications();
     } catch (error) {
       console.error("There was an error updating the notification!", error);
     }

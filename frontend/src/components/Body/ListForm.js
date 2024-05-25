@@ -12,7 +12,7 @@ const ListForm = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/list",
+        "http://localhost:3000/todolist",
         {
           title,
           description,
@@ -31,7 +31,6 @@ const ListForm = () => {
       console.error("There was an error creating the to-do!", error);
     }
   };
-
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded">
       <h1 className="text-2xl font-bold mb-4">Create a To-Do</h1>

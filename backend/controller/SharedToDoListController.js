@@ -1,9 +1,11 @@
 const ShareTodoListService = require("../service/ShareToDoListService");
 
 class ShareToDoListController {
+
   static async createSharedToDoList(req, res) {
     const userId = req.params.id;
     const sharedListData = req.body;
+
     try {
       const newList = await ShareTodoListService.createNewSharedList(
         userId,
