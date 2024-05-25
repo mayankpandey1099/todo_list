@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const Notifications = ({ user }) => {
+const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const token = useSelector((state) => state.auth.isToken);
+
 
   const fetchNotifications = async () => {
     try {
@@ -22,33 +23,40 @@ const Notifications = ({ user }) => {
     }
   };
 
-  const handleAction = async (id, status) => {
+  const handleAccept = async (id) => {
     try {
-      if (status) {
-        await axios.delete(`http://localhost:3000/notification/delete/${id}`, {
-          headers: {
-            Authorization: token,
-          },
-        });
-      } else {
-        await axios.patch(
-          `http://localhost:3000/notification/update/${id}`,
-          {},
+        const response = await axios.patch(`http://localhost:3000/notification/update/${id}`,{},
           {
             headers: {
               Authorization: token,
             },
           }
         );
-      }
-      fetchNotifications();
-    } catch (error) {
+        console.log(response);
+        await fetchNotifications();
+      } catch (error) {
       console.error("There was an error updating the notification!", error);
     }
   };
 
+  const handleDelete = async(id)=>{
+    try{
+        const response = await axios.delete(`http://localhost:3000/notification/delete/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        console.log(response,"this is response");
+        await fetchNotifications();
+    } catch(err){
+      console.error("There was an error deleting the notification", err);
+    }
+  }
+
   useEffect(() => {
-    fetchNotifications();
+    const intervalId = setInterval(fetchNotifications, 2000);
+    return () => clearInterval(intervalId);
+    //fetchNotifications();
   }, []);
 
   return (
@@ -74,16 +82,16 @@ const Notifications = ({ user }) => {
                     key={notification.id}
                     className="p-2 border-b border-gray-200"
                   >
-                    <p>Task ID: {notification.taskId} shared with you</p>
+                    <p>Task ID: {notification.id} shared with you</p>
                     <button
                       className="mr-2 bg-green-500 text-white px-2 py-1 rounded"
-                      onClick={() => handleAction(notification.id, "accepted")}
+                      onClick={() => handleAccept(notification.id)}
                     >
                       Accept
                     </button>
                     <button
                       className="bg-red-500 text-white px-2 py-1 rounded"
-                      onClick={() => handleAction(notification.id, "declined")}
+                      onClick={() => handleDelete(notification.id)}
                     >
                       Decline
                     </button>

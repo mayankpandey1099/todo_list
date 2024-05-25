@@ -8,17 +8,6 @@ const SharedList = () => {
   const [loading, setLoading] = useState(false);
   const token = useSelector((state)=> state.auth.isToken);
   
-
-  // useEffect(()=>{
-  //   const intervalId = setInterval(fetchSharedTodoList, 2000);
-  //   return () => clearInterval(intervalId);
-  // }, [])
-  useEffect(() => {
-    fetchSharedTodoList()
-  },[]);
-
-
-
   const fetchSharedTodoList = async () => {
     setLoading(true);
     try {
@@ -27,6 +16,7 @@ const SharedList = () => {
           Authorization: token,
         },
       });
+      console.log(response.data);
       setTodos(response.data);
     } catch (error) {
       console.error("Error fetching todo list:", error);
@@ -35,44 +25,46 @@ const SharedList = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3000/sharedtodolist/delete/${id}`, {
+  const handleDelete = async (id) => {
+    try{
+    const response = await axios.delete(`http://localhost:3000/sharedtodolist/delete/${id}`, {
         headers: {
           Authorization: token,
         },
       })
-      .then(() => {
-        setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-      })
-      .catch((error) => console.error("Error deleting todo:", error));
+      console.log(response,"response");
+      await fetchSharedTodoList();
+    } catch(error){
+      console.error("Error deleting todo:", error)
+    };
   };
 
 
-  const handleMarkAsRead = (id) => {
-    axios
-      .put(`http://localhost:3000/sharedtodolist/update/${id}`, {}, {
+  const handleMarkAsRead = async (id) => {
+    try{
+      console.log(id, "todoid");
+    const response = await axios.patch(`http://localhost:3000/sharedtodolist/update/${id}`, {}, {
         headers: {
           Authorization: token,
         },
       })
-      .then(() => {
-        // Update the todo list item to mark it as read
-        setTodos((prevTodos) =>
-          prevTodos.map((todo) =>
-            todo.id === id ? { ...todo, markedRead: true } : todo
-          )
-        );
-      })
-      .catch((error) => console.error("Error marking todo as read:", error));
+      console.log(response, "response");
+      await fetchSharedTodoList();
+    } catch(error){
+      console.error("Error marking todo as read:", error)
+    };
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchSharedTodoList, 2000);
+    return () => clearInterval(intervalId);
+    //fetchSharedTodoList();
+  }, []);
+
 
   return (
     <div className="max-w-md mx-auto px-4 bg-white shadow-md rounded">
       <h1 className="text-2xl font-bold mb-4">Shared To-do List</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
         <ul>
           {todos.map((todo) => (
             <li
@@ -102,7 +94,6 @@ const SharedList = () => {
             </li>
           ))}
         </ul>
-      )}
     </div>
   );
 };

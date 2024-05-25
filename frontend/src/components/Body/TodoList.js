@@ -57,7 +57,9 @@ const TodoList = () => {
   };
 
    useEffect(() => {
-     fetchTodos();
+      const intervalId = setInterval(fetchTodos, 2000);
+      return () => clearInterval(intervalId);
+     //fetchTodos();
    }, []);
 
   return (

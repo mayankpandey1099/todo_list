@@ -6,10 +6,9 @@ class ToDoListController {
       const userId = req.user.userId;
       const rows = await ToDoListService.findAllList(userId);
 
-      res.json({
+      res.status(200).json({
         lists: rows,
       });
-      console.log("successfully dispatched the data");
     } catch (error) {
       console.error("Error fetching paginated lists:", error);
       res.status(500).json({
@@ -49,7 +48,7 @@ class ToDoListController {
           error: "failed to delete the list",
         });
       }
-      res.json({
+      res.status(202).json({
         message: "List deleted successfully",
       });
     } catch (error) {
