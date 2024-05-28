@@ -113,15 +113,16 @@ To run the full application (both backend and frontend), follow these steps:
 - **deleteList**: [DELETE] https://your_server:port/todolist/:id
 - **updateMarkedDone**: [PATCH] https://your_server:port/todolist/update/:id
 ```
-```bash
+
 #### sharedtodo list
+```bash
 - **createSharedToDoList**: [POST] https://your_server:port/sharedtodolist/:uderId
 - **getAllSharedToDoList**: [GET] https://your_server:port/sharedtodolist/lists
 - **deleteSharedList**: [DELETE] https://your_server:port/sharedtodolist/delete/:id
 - **updateMarkedDone**: [PATCH] https://your_server:port/sharedtodolist/update/:id
 ```
-```bash
 #### notification
+```bash
 - **getAllNotification**: [GET] https://your_server:port/notification/lists
 - **deleteNotification**: [DELETE] https://your_server:port/notification/delete/:id
 - **updateNotification**: [PATCH] https://your_server:port/notification/update/:id
