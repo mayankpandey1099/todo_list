@@ -42,7 +42,6 @@ const UserList = ({ todo, closeUserList }) => {
     }catch(error){
         console.error("there was error in sharing the list to user", error);
     }
-
   };
     return (
     <div className="user-list container mx-auto p-4">
@@ -55,7 +54,7 @@ const UserList = ({ todo, closeUserList }) => {
             {users.map((user) => (
               <li key={user.id} className="mb-2">
                 <button
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                   onClick={() => onSelectUser(user.id)}
                 >
                   {user.name}
@@ -64,7 +63,7 @@ const UserList = ({ todo, closeUserList }) => {
             ))}
           </ul>
           <button
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4"
             onClick={closeUserList}
           >
             Close

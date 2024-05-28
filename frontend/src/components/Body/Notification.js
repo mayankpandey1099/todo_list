@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import useFetchList from "../hooks/useFetchList";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const token = useSelector((state) => state.auth.isToken);
+  const {fetchSharedTodoList} = useFetchList();
 
 
   const fetchNotifications = async () => {
@@ -32,8 +34,8 @@ const Notifications = () => {
             },
           }
         );
-        console.log(response);
         await fetchNotifications();
+        await fetchSharedTodoList();
       } catch (error) {
       console.error("There was an error updating the notification!", error);
     }
@@ -46,7 +48,6 @@ const Notifications = () => {
             Authorization: token,
           },
         });
-        console.log(response,"this is response");
         await fetchNotifications();
     } catch(err){
       console.error("There was an error deleting the notification", err);
@@ -63,7 +64,7 @@ const Notifications = () => {
     <div>
       <div className="relative inline-block">
         <button
-          className="text-xl font-bold"
+          className="text-lg text-white"
           onClick={() => setShowNotifications(!showNotifications)}
         >
           Notifications

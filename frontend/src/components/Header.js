@@ -17,10 +17,16 @@ const Header = () => {
   return (
     <header className="bg-blue-600 p-4 flex items-center justify-between shadow-md">
       <div className="flex items-center"></div>
-      <nav className="flex space-x-4">
+      <nav className="flex space-x-4 text-center">
         {token ? (
           <>
             <Notifications />
+            <button
+            onClick={handleLogout}
+            className="text-white hover:text-gray-200"
+          >
+            Logout
+          </button>
           </>
         ) : (
           <>
@@ -32,15 +38,6 @@ const Header = () => {
             </Link>
           </>
         )}
-
-        {token ? (
-          <button
-            onClick={handleLogout}
-            className="text-white hover:text-gray-200"
-          >
-            Logout
-          </button>
-        ) : null}
       </nav>
     </header>
   );

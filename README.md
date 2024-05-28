@@ -19,6 +19,8 @@ This is a simple To-Do List application built with React and Express.js. It feat
 Ensure you have the following installed on your local development environment:
 
 - Node.js
+- React.js
+- Sequelize
 - npm (Node Package Manager)
 
 ### Installation
@@ -27,7 +29,6 @@ Ensure you have the following installed on your local development environment:
 
     ```bash
     git clone https://github.com/mayankpandey1099/todo_list.git
-    cd backend
     ```
 
 2. Install the dependencies:
@@ -36,29 +37,19 @@ Ensure you have the following installed on your local development environment:
     npm install
     ```
 
-3. Install Axios:
-
-    ```bash
-    npm install axios
-    ```
-
-4. (Optional) Install additional dependencies if needed:
-
-    ```bash
-    npm install express cors
-    ```
-
 ### Running the Application
 
 1. Start the backend server:
 
     ```bash
-    node server.js
+    cd backend
+    npm start
     ```
 
 2. Start the React application:
 
     ```bash
+    cd frontend
     npm start
     ```
 
