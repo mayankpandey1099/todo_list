@@ -1,29 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useFetchList from "../hooks/useFetchList";
+import { setNotifications } from "../Redux/ListSlice";
+import { getSocket } from "../socket";
+
 
 const Notifications = () => {
-  const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const token = useSelector((state) => state.auth.isToken);
-  const {fetchSharedTodoList} = useFetchList();
+  const dispatch = useDispatch();
 
-
-  const fetchNotifications = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/notification/lists",
-        {
-          headers: {
-            Authorization: token,
-          },
-        });
-      setNotifications(response.data);
-    } catch (error) {
-      console.error("There was an error fetching notifications!", error);
-    }
-  };
+  const {fetchSharedTodoList, fetchNotifications} = useFetchList();
+  const notifications = useSelector((state)=> state.todolist.notifications);
 
   const handleAccept = async (id) => {
     try {
@@ -55,10 +44,13 @@ const Notifications = () => {
   }
 
   useEffect(() => {
-    const intervalId = setInterval(fetchNotifications, 2000);
-    return () => clearInterval(intervalId);
-    //fetchNotifications();
-  }, []);
+    const socket = getSocket();
+    socket.on("notification", (notification) => {
+      // Dispatch action to add new notification to the Redux state
+      dispatch(setNotifications([...notifications, notification]));
+    });
+    fetchNotifications();
+  }, [notifications]);
 
   return (
     <div>

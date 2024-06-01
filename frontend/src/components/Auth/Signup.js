@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthenticated, setToken } from "../Redux/AuthSlice";
+import { connectWebSocket } from "../socket";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -27,11 +28,15 @@ const Signup = () => {
       );
 
       const token = response.data.token;
+      const userId = response.data.userId;
 
       dispatch(setAuthenticated(true));
       dispatch(setToken(token));
 
-      alert(response.data.message);
+      //socket getting connected
+      const socket = connectWebSocket("http://localhost:3000");
+      socket.emit("register", userId);
+
       navigate("/");
     } catch (error) {
       alert("An error occurred. Please try again later.");

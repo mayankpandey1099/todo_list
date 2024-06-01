@@ -1,22 +1,20 @@
 const ShareTodoListService = require("../service/ShareToDoListService");
 
 class ShareToDoListController {
-
-  static async createSharedToDoList(req, res) {
-    const userId = req.params.id;
-    const sharedListData = req.body;
+  
+  static async createSharedToDoList(recipientUserId, notification) {
+    const userId = recipientUserId;
+    const sharedListData = notification;
 
     try {
       const newList = await ShareTodoListService.createNewSharedList(
         userId,
         sharedListData
       );
-      res.status(201).json(newList);
+      return newList.dataValues;
     } catch (error) {
       console.error("Error creating shared list:", error);
-      res.status(500).json({
-        error: "Internal server error",
-      });
+      throw new Error("error creating shared list");
     }
   }
 
@@ -65,7 +63,10 @@ class ShareToDoListController {
           error: "List not found",
         });
       }
-      const rowsAffected = ShareTodoListService.updateOneSharedList(listId, userId);
+      const rowsAffected = ShareTodoListService.updateOneSharedList(
+        listId,
+        userId
+      );
       if (rowsAffected === 0) {
         return res.status(404).json({
           error: "Failed to update the list",

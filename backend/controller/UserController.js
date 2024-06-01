@@ -52,6 +52,7 @@ class UserController {
         message:
           "registration successful. Check your email for a confirmation message",
         token: token,
+        userId: newUser.id,
       });
     } catch (error) {
       res.status(500).json({
@@ -80,7 +81,7 @@ class UserController {
         // const text = "Thank you for logging in. Your login was successful.";
         // //await sendSuccessEmail(email,subject,text);
 
-        res.status(200).json({ message: "login successfully", token });
+        res.status(200).json({ message: "login successfully", token, userId:user.id });
       } else {
         console.log("password not match");
         // Passwords don't match

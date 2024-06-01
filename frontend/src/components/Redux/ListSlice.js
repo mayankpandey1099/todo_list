@@ -5,6 +5,7 @@ const listSlice = createSlice({
     initialState: {
         lists: [],
         sharedLists:[],
+        notifications:[],
     },
     reducers: {
         setLists: (state, action)=>{
@@ -12,9 +13,12 @@ const listSlice = createSlice({
         },
         setSharedLists: (state, action)=>{
             state.sharedLists = action.payload;
+        },
+        setNotifications: (state, action)=>{
+            state.notifications = action.payload;
         }
     }
 });
 
-export const{setLists, setSharedLists} = listSlice.actions;
+export const{setLists, setSharedLists, setNotifications} = listSlice.actions;
 export default listSlice.reducer;

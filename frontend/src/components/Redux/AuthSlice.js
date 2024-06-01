@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { disconnectWebSocket } from "../socket";
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -18,6 +19,7 @@ const AuthSlice = createSlice({
       state.isAuth = false;
       state.isToken = null; 
       localStorage.removeItem("token");
+      disconnectWebSocket();
     },
   },
 });

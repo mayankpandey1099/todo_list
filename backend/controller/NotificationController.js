@@ -1,16 +1,17 @@
 const NotificationService = require("../service/NotificationService");
 
 class NotificationController {
+  
   static async getAllNotification(req, res) {
     const userId = req.user.userId;
     try {
       const notifications = await NotificationService.findAllNotification(
         userId
       );
-      res.status(200).json(notifications);
+      return res.status(202).json(notifications);
     } catch (error) {
       console.error("Error fetching notifications:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({error:"Error fetching notifications"});
     }
   }
 

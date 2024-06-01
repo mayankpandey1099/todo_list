@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { getSocket } from "../socket";
 
 const UserList = ({ todo, closeUserList }) => {
   const [users, setUsers] = useState([]);
@@ -29,16 +30,24 @@ const UserList = ({ todo, closeUserList }) => {
 
   const onSelectUser = async (id) => {
      const {title, description} = todo;
+     const notification = { title, description };
     try{
-        const response = await axios.post(
-          `http://localhost:3000/sharedtodolist/${id}`,
-          { title, description },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
+        // const response = await axios.post(
+        //   `http://localhost:3000/sharedtodolist/${id}`,
+        //   { title, description },
+        //   {
+        //     headers: {
+        //       Authorization: token,
+        //     },
+        //   }
+        // );
+        console.log(notification);
+        const socket = getSocket();
+        socket.emit("send notification", {
+          recipientUserId: id,
+          notification: notification,
+        });
+        
     }catch(error){
         console.error("there was error in sharing the list to user", error);
     }
