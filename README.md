@@ -100,27 +100,33 @@ To run the full application (both backend and frontend), follow these steps:
 
 ### Backend Routes
 #### login and signup and get all users
-- **loginUser**: [POST] https://your_server:port/user/login     
+```bash
+- **loginUser**:  [POST] https://your_server:port/user/login    
 - **signupUset**: [POST] https://your_server:port/user/signup
 - **getAllUser**: [GET] https://your_server:port/user/users
+```
 
 #### todo list
+```bash
 - **createList**: [POST] https://your_server:port/todolist
 - **getAllToDoList**: [GET] https://your_server:port/todolist/lists
 - **deleteList**: [DELETE] https://your_server:port/todolist/:id
 - **updateMarkedDone**: [PATCH] https://your_server:port/todolist/update/:id
+```
 
 #### sharedtodo list
+```bash
 - **createSharedToDoList**: [POST] https://your_server:port/sharedtodolist/:uderId
 - **getAllSharedToDoList**: [GET] https://your_server:port/sharedtodolist/lists
 - **deleteSharedList**: [DELETE] https://your_server:port/sharedtodolist/delete/:id
 - **updateMarkedDone**: [PATCH] https://your_server:port/sharedtodolist/update/:id
-
+```
 #### notification
+```bash
 - **getAllNotification**: [GET] https://your_server:port/notification/lists
 - **deleteNotification**: [DELETE] https://your_server:port/notification/delete/:id
-- **updateNotification**: [PATCH] https://your_server:port/notification/update/:id 
-
+- **updateNotification**: [PATCH] https://your_server:port/notification/update/:id
+```
 
 
 
